@@ -5,6 +5,7 @@
  */
 package scao.startstop;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,5 +27,7 @@ public class BulletFacade extends AbstractFacade<Bullet> {
     public BulletFacade() {
         super(Bullet.class);
     }
-    
+public List<Bullet> findBySessionId(int id) {
+    return em.createNamedQuery("Bullets.findBySessionId", Bullet.class).setParameter("sessionId", id).getResultList();
+} 
 }
