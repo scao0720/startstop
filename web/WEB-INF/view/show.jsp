@@ -13,7 +13,7 @@
 
 <c:if test="${session.stop == null}">
   <strong>Add notes</strong>
-    <form action="${pageContext.request.contextPath}/update" method="post">
+    <form action="${pageContext.request.contextPath}/bullets" method="post">
         <input type="hidden" name="session_id" value="${session.id}"/>
         <table border="0">
             <tr>

@@ -75,9 +75,12 @@ public class SessionServlet extends HttpServlet {
             sessionFacade.edit(session);
             response.sendRedirect(request.getContextPath() + "/show?id=" + id);
         
-         // if update page is requested (adding new bullet)
-        } else if (path.equals("/update")) {
-            
+         // if delete page is requested (adding new bullet) - NOTE sessionfacade.delete whatever
+        } else if (path.equals("/delete")) {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Session session = sessionFacade.find(id);
+            sessionFacade.remove(session);
+            response.sendRedirect(request.getContextPath() + "/");
         }
     }
 

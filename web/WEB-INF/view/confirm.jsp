@@ -4,7 +4,7 @@
     Author     : Sabina
 --%>
 
-<form action="delete.jsp" method="post">
+<form action="${pageContext.request.contextPath}/delete" method="post">
     <p>Are you sure you want to delete session #${param.id}?</p>
     <input type="submit" value="Yes, delete this session." />
     <input type="hidden" name="id" value="${param.id}"/>

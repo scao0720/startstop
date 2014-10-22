@@ -5,7 +5,6 @@
 --%>
 
 <h2>Name your new session</h2>
-<!-- TODO add servlet -->
 <form action="${pageContext.request.contextPath}/create" method="post">
     <table border="0">
         <tr>
