@@ -5,6 +5,7 @@
 --%>
 
 <h2>Session #${session.id}: ${session.name} </h2>
+<p>added by</p>
 <p><fmt:formatDate value="${session.start}" pattern="yyyy-MM-dd"/></p>
 <ul class="list-inline">
     <li>Start: <fmt:formatDate value="${session.start}" pattern="HH:mm:ss"/></li>
