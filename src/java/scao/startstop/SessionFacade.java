@@ -5,6 +5,7 @@
  */
 package scao.startstop;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,5 +27,8 @@ public class SessionFacade extends AbstractFacade<Session> {
     public SessionFacade() {
         super(Session.class);
     }
+    public List<Session> findByUsername(String username) {
+    return em.createNamedQuery("Sessions.findByUsername", Session.class).setParameter("username", username).getResultList();
+} 
     
 }

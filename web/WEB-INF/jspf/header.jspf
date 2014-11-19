@@ -1,10 +1,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%  boolean isAuthenticated = false;
     for (Cookie cookie
             : ((HttpServletRequest) pageContext.getRequest()).getCookies()) {
-        if (cookie.getName().equals("user_email")) {
+        if (cookie.getName().equals("username")) {
             isAuthenticated = true;
             break;
         }
@@ -36,10 +37,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="http://localhost:8080/ahd-tracker/">AHD Tracker <span class="sr-only">(current)</span></a></li>
+                    <li><a href="http://localhost:8080/ahd-tracker/">AHD Tracker</a></li>
                     <li><a href="http://localhost:8080/startstop/">StartStop</a></li>
                 </ul>
-                <form action="signout.jsp" method="post" class="navbar-form navbar-right">
+                <form action="/ccfinal/signout.jsp" method="post" class="navbar-form navbar-right">
                     <ul class="nav navbar-nav navbar-right">
                         <li><button type="submit" class="btn btn-default">Sign out</button></li>
                     </ul>

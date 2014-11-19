@@ -1,11 +1,10 @@
 <%-- 
-    Document   : index
-    Created on : Oct 20, 2014, 6:06:02 PM
+    Document   : showby
+    Created on : Nov 18, 2014, 7:13:05 PM
     Author     : Sabina
 --%>
 
-<h2>StartStop Note Taker</h2>
-<p><strong>Session notes</strong></p>
+<h2>Sessions created by ${param.username}</h2>
 <table class="table table-condensed" width: auto>
     <thead>
         <tr>
@@ -18,11 +17,7 @@
         <tr>
             <td><fmt:formatDate value="${session.start}" pattern="yyyy-MM-dd" /></td>
             <td><a href="${pageContext.request.contextPath}/show?id=${session.id}"><c:out value="${session.name}" /></a></td>
-            <td>added by <a href="${pageContext.request.contextPath}/showby?username=${session.username}"><c:out value="${session.username}" /></a></td>
         </tr>
         </c:forEach>
     </tbody>
 </table>
-<a href="${pageContext.request.contextPath}/new">Start new session note</a>
-
-

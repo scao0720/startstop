@@ -1,11 +1,12 @@
 package scao.startstop;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,17 +28,29 @@ public class SessionServlet extends HttpServlet {
 
         // if index page is requested
         if (path.equals("/")) {
+            List<Session> sessions;
+            String username = request.getParameter("username");
+            if (username == null) {
+                sessions = sessionFacade.findAll();
+            } else {
+                sessions = sessionFacade.findByUsername(username);
+            }
             // store session list in servlet context
-            getServletContext().setAttribute("sessions", sessionFacade.findAll());
+            getServletContext().setAttribute("sessions", sessions);
             view = "/index";
 
         // if new page is requested, does not require action here.
         
         // if show page is requested
-        } else if (path.equals("/show")) {
+        } if (path.equals("/show")) {
             Integer id = Integer.parseInt(request.getParameter("id"));
             getServletContext().setAttribute("session", sessionFacade.find(id));
             getServletContext().setAttribute("bullets", bulletFacade.findBySessionId(id));
+        }
+        
+        if (path.equals("/showby")) {
+            String username = request.getParameter("username");
+            getServletContext().setAttribute("sessions", sessionFacade.findByUsername(username));
         }
 
         // if confirm page is requested, does not require action here.
@@ -59,11 +72,19 @@ public class SessionServlet extends HttpServlet {
         // create, delete, finish
 
         String path = request.getServletPath();
+        String username = null;
+        for (Cookie cookie : request.getCookies()) {
+        if (cookie.getName().equals("username")) {
+            username = cookie.getValue();
+            break;
+        }
+    }
 
         // if create action is requested
         if (path.equals("/create")) {
             Session session = new Session(null, request.getParameter("name"));
             session.setStart(new Date());
+            session.setUsername(username);
             sessionFacade.create(session);
             response.sendRedirect(request.getContextPath() + "/show?id=" + session.getId());
         

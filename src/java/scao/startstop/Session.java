@@ -34,8 +34,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sessions.findById", query = "SELECT s FROM Sessions s WHERE s.id = :id"),
     @NamedQuery(name = "Sessions.findByName", query = "SELECT s FROM Sessions s WHERE s.name = :name"),
     @NamedQuery(name = "Sessions.findByStart", query = "SELECT s FROM Sessions s WHERE s.start = :start"),
-    @NamedQuery(name = "Sessions.findByStop", query = "SELECT s FROM Sessions s WHERE s.stop = :stop")})
+    @NamedQuery(name = "Sessions.findByStop", query = "SELECT s FROM Sessions s WHERE s.stop = :stop"),
+    @NamedQuery(name = "Sessions.findByUsername", query = "SELECT s from Sessions s WHERE s.username = :username")})
 public class Session implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "username")
+    private String username;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,6 +127,14 @@ public class Session implements Serializable {
     @Override
     public String toString() {
         return "scao.startstop.Sessions[ id=" + id + " ]";
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
     
 }
